@@ -14,18 +14,22 @@ def banner():
 #this module is a pre check and just makes sure we can run the commands we want
 def checkForMetasploit():
 	if sys.platform == "linux2":
-		if os.sys.isdir("/opt/metasploit-framework"):
+		if os.path.isdir("/opt/metasploit-framework") == True:
 			os.system("clear")
 			print "AWWWWW CRAP, Dude you gotta install metasloit before I can work :P\n\n"
 			print "cd /opt\nsudo git clone https://github.com/rapid7/metasploit-framework.git\nsudo chown -R `whoami` /opt/metasploit-framework\ncd metasploit-framework"
-			sys.exit()
-	if sys.platform == "darwin"
-		if os.sys.isdir("/usr/local/share/metasploit-framework"):
+			answer = createAndShowMenu("Continue ?",["YES","NO"])
+			if answer == 'NO':
+				sys.exit()
+	if sys.platform == "darwin":
+		if os.path.isdir("/usr/local/share/metasploit-framework/") == False:
 			print 'UHHHHH Looks like you dont have metasploit installed \nHere Follow this guide it worked for me\nhttp://www.darkoperator.com/installing-metasploit-framewor/'
-			sys.exit()
+			answer = createAndShowMenu("Continue ?",["YES","NO"])
+			if answer == 'NO':
+				sys.exit()
 	if sys.platform == "win32":
 		print "dude.... dont even try...\n\n"
-		sleep 2
+		os.sleep(2)
 		print 'JK JK. Install metasploit first and if it is installed. Make sure its in your PATH varible'
 		sys.exit()
 
