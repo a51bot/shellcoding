@@ -13,13 +13,21 @@ def banner():
 
 #this module is a pre check and just makes sure we can run the commands we want
 def checkForMetasploit():
-	#check system type, then if no metasploit install, offer options for install
-	#brew install
-	#apt-get
-	#git clone
-
-	if nometa == true:
-		print "hi"
+	if sys.platform == "linux2":
+		if os.sys.isdir("/opt/metasploit-framework"):
+			os.system("clear")
+			print "AWWWWW CRAP, Dude you gotta install metasloit before I can work :P\n\n"
+			print "cd /opt\nsudo git clone https://github.com/rapid7/metasploit-framework.git\nsudo chown -R `whoami` /opt/metasploit-framework\ncd metasploit-framework"
+			sys.exit()
+	if sys.platform == "darwin"
+		if os.sys.isdir("/usr/local/share/metasploit-framework"):
+			print 'UHHHHH Looks like you dont have metasploit installed \nHere Follow this guide it worked for me\nhttp://www.darkoperator.com/installing-metasploit-framewor/'
+			sys.exit()
+	if sys.platform == "win32":
+		print "dude.... dont even try...\n\n"
+		sleep 2
+		print 'JK JK. Install metasploit first and if it is installed. Make sure its in your PATH varible'
+		sys.exit()
 
 #this is a menu creator that just handles number input
 def createAndShowMenu(prompt,items):
@@ -149,8 +157,6 @@ def validate_port(port):
 
 	return True
 
-def settings():
-	print
 
 def spawnListener():
 	os.system("clear")
@@ -163,7 +169,7 @@ def spawnListener():
 if __name__ == "__main__":
 	try:
 		banner()
-		settings()
+		checkForMetasploit()
 		optionPicker()
 	except KeyboardInterrupt:
 		os.system("clear")
